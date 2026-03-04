@@ -1,0 +1,70 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      # Configuración global de CORS
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+
+      # Rutas a los microservicios
+      routes:
+        # ── Microservicio de Usuarios (Spring Boot) ──
+        - id: users-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/auth/**, /api/personas/**, /api/documents/**
+          filters:
+            - RewritePath=/(?<segment>.*), /$\{segment}
+
+        # ── Microservicio de Servicios (NestJS) ──
+        - id: services-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/services/**, /api/appointments/**
+          filters:
+            - RewritePath=/(?<segment>.*), /$\{segment}
+
+        # ── Microservicio del Diario (Spring Boot) ──
+        - id: diary-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/diary/**, /api/habits/**, /api/album/**
+          filters:
+            - RewritePath=/(?<segment>.*), /$\{segment}
+
+        # ── Microservicio de Euphoria / Agente IA (Python) ──
+        - id: euphoria-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/euphoria/**
+          filters:
+            - RewritePath=/(?<segment>.*), /$\{segment}
+
+# JWT Configuration (misma clave secreta que el microservicio de Usuarios)
+jwt:
+  secret: MiClaveSecretaSuperSeguraParaJWTDebeSerMuyLarga123456789
+
+# Rutas públicas que NO requieren autenticación JWT
+gateway:
+  open-endpoints:
+    - /api/auth/login
+    - /api/auth/register
+    - /api/auth/register-therapist
+    - /api/auth/google
+    - /api/auth/forgot-password

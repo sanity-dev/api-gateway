@@ -7,7 +7,6 @@ spring:
 
   cloud:
     gateway:
-      # Configuración global de CORS
       globalcors:
         cors-configurations:
           '[/**]':
@@ -22,9 +21,8 @@ spring:
             allowedHeaders: "*"
             allowCredentials: true
 
-      # Rutas a los microservicios
       routes:
-        # ── Microservicio de Usuarios (Spring Boot) ──
+        # ── Usuarios (Spring Boot) ──
         - id: users-service
           uri: http://ec2-3-148-176-128.us-east-2.compute.amazonaws.com:8081
           predicates:
@@ -32,15 +30,23 @@ spring:
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
 
-        # ── Microservicio de Servicios (NestJS) ──
-        - id: services-service
+        # ── Specialist (NestJS) ──
+        - id: specialist-service
           uri: http://localhost:8082
           predicates:
-            - Path=/api/services/**, /api/appointments/**
+            - Path=/api/specialist/**, /api/appointment/**
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
 
-        # ── Microservicio del Diario (Spring Boot) ──
+        # ── Euphoria (Python) ──
+        - id: euphoria-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/euphoria/**
+          filters:
+            - RewritePath=/api/euphoria/(?<segment>.*), /$\{segment}
+
+        # ── Diario (Spring Boot) ──
         - id: diary-service
           uri: http://localhost:8083
           predicates:
@@ -48,19 +54,9 @@ spring:
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
 
-        # ── Microservicio de Euphoria / Agente IA (Python) ──
-        - id: euphoria-service
-          uri: http://localhost:8084
-          predicates:
-            - Path=/api/euphoria/**
-          filters:
-            - RewritePath=/(?<segment>.*), /$\{segment}
-
-# JWT Configuration (misma clave secreta que el microservicio de Usuarios)
 jwt:
   secret: MiClaveSecretaSuperSeguraParaJWTDebeSerMuyLarga123456789
 
-# Rutas públicas que NO requieren autenticación JWT
 gateway:
   open-endpoints:
     - /api/auth/login

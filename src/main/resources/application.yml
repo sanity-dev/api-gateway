@@ -40,7 +40,7 @@ spring:
 
         # ── Euphoria (Python) ──
         - id: euphoria-service
-          uri: http://localhost:8084
+          uri:  https://euphoria-app.politedune-01b83c33.westus2.azurecontainerapps.io
           predicates:
             - Path=/api/euphoria/**
           filters:

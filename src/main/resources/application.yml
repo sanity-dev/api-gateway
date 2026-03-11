@@ -4,13 +4,14 @@ server:
 spring:
   application:
     name: api-gateway
-
+  config:
+    import: "optional:classpath:application-dev.yml"
   cloud:
     gateway:
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: "http://localhost:4200"
+            allowedOrigins: ${ALLOWED_ORIGINS:http://localhost:4200}
             allowedMethods:
               - GET
               - POST
@@ -22,9 +23,9 @@ spring:
             allowCredentials: true
 
       routes:
-        # ── Usuarios (Spring Boot) ──
+        # ── Usuarios ──
         - id: users-service
-          uri: http://ec2-3-148-176-128.us-east-2.compute.amazonaws.com:8081
+          uri: ${USERS_SERVICE_URI:http://localhost:8081}
           predicates:
             - Path=/api/auth/**, /api/personas/**, /api/documents/**
           filters:
@@ -32,7 +33,7 @@ spring:
 
         # ── Specialist (NestJS) ──
         - id: specialist-service
-          uri: http://localhost:8082
+          uri: ${SPECIALIST_SERVICE_URI:http://localhost:8082}
           predicates:
             - Path=/api/specialist/**, /api/appointment/**
           filters:
@@ -40,30 +41,30 @@ spring:
 
         # ── Euphoria (Python) ──
         - id: euphoria-service
-          uri:  https://euphoria-app.politedune-01b83c33.westus2.azurecontainerapps.io
+          uri: ${EUPHORIA_SERVICE_URI:https://euphoria-app.politedune-01b83c33.westus2.azurecontainerapps.io}
           predicates:
             - Path=/api/euphoria/**
           filters:
             - RewritePath=/api/euphoria/(?<segment>.*), /$\{segment}
 
-        # ── Diario (Spring Boot) ──
+        # ── Diario ──
         - id: diary-service
-          uri: http://localhost:8083
+          uri: ${DIARY_SERVICE_URI:http://localhost:8083}
           predicates:
             - Path=/api/diary/**, /api/habits/**, /api/album/**
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
 
-          # ── Notificaciones (Spring Boot) ──
+        # ── Notificaciones ──
         - id: notifications-service
-          uri: http://localhost:8085
+          uri: ${NOTIFICATIONS_SERVICE_URI:http://localhost:8085}
           predicates:
             - Path=/api/notificaciones/**, /api/tokens/**
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
 
 jwt:
-  secret: MiClaveSecretaSuperSeguraParaJWTDebeSerMuyLarga123456789
+  secret: ${JWT_SECRET:MiClaveSecretaSuperSeguraParaJWTDebeSerMuyLarga123456789}
 
 gateway:
   open-endpoints:

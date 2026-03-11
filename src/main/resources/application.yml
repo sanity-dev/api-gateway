@@ -54,6 +54,14 @@ spring:
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
 
+          # ── Notificaciones (Spring Boot) ──
+        - id: notifications-service
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/notificaciones/**, /api/tokens/**
+          filters:
+            - RewritePath=/(?<segment>.*), /$\{segment}
+
 jwt:
   secret: MiClaveSecretaSuperSeguraParaJWTDebeSerMuyLarga123456789
 

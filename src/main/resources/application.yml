@@ -35,7 +35,7 @@ spring:
         - id: specialist-service
           uri: ${SPECIALIST_SERVICE_URI:http://localhost:8082}
           predicates:
-            - Path=/api/specialist/**, /api/appointment/**
+            - Path=/api/specialist/*, /api/appointment/, /api/membership/*
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
 
@@ -73,3 +73,4 @@ gateway:
     - /api/auth/register-therapist
     - /api/auth/google
     - /api/auth/forgot-password
+    - /api/membership/webhook

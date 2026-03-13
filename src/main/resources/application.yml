@@ -25,7 +25,7 @@ spring:
       routes:
         # ── Usuarios ──
         - id: users-service
-          uri: ${USERS_SERVICE_URI:http://localhost:8081}
+          uri: ${USERS_SERVICE_URI:http://3.151.143.108:8081}
           predicates:
             - Path=/api/auth/**, /api/personas/**, /api/documents/**
           filters:
@@ -39,9 +39,9 @@ spring:
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
 
-        # ── Euphoria (Python) ──
+        # ── Euphoria / Sanity Agent (Python) ──
         - id: euphoria-service
-          uri: ${EUPHORIA_SERVICE_URI:https://euphoria-app.politedune-01b83c33.westus2.azurecontainerapps.io}
+          uri: ${EUPHORIA_SERVICE_URI:http://localhost:5000}
           predicates:
             - Path=/api/euphoria/**
           filters:

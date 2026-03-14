@@ -1,0 +1,74 @@
+# ==========================
+# Java
+# ==========================
+*.class
+*.jar
+*.war
+*.ear
+
+# Directorios de compilación
+/target/
+/out/
+/build/
+
+# ==========================
+# Maven / Gradle
+# ==========================
+# Maven
+/repository/
+/.mvn/wrapper/maven-wrapper.jar
+
+# Gradle
+.gradle/
+/build/
+!gradle-wrapper.jar
+gradle-wrapper.properties
+
+# ==========================
+# Logs y archivos temporales
+# ==========================
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# ==========================
+# Spring Boot
+# ==========================
+/spring.log
+!/src/main/resources/application.properties
+!/src/main/resources/application.yml
+
+# ==========================
+# IDE / Editor files
+# ==========================
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+/out/
+
+# Eclipse
+.metadata/
+*.classpath
+*.project
+*.settings/
+*.factorypath
+
+# VS Code
+.vscode/
+
+# ==========================
+# Sistema operativo
+# ==========================
+.DS_Store
+Thumbs.db
+
+# ==========================
+# Test / Coverage
+# ==========================
+/target/test-classes/
+/target/test-reports/
+/coverage/

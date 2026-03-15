@@ -4,8 +4,7 @@ server:
 spring:
   application:
     name: api-gateway
-  config:
-    import: "optional:classpath:application-dev.yml"
+ 
   cloud:
     gateway:
       globalcors:

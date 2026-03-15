@@ -44,7 +44,7 @@ spring:
           predicates:
             - Path=/api/euphoria/**
           filters:
-            - RewritePath=/(?<segment>.*), /$\{segment}
+            - RewritePath=/api/euphoria/(?<segment>.*), /$\{segment}
 
         # ── Diario ──
         - id: diary-service

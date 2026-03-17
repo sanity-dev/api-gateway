@@ -4,8 +4,7 @@ server:
 spring:
   application:
     name: api-gateway
-  config:
-    import: "optional:classpath:application-dev.yml"
+ 
   cloud:
     gateway:
       globalcors:
@@ -25,7 +24,7 @@ spring:
       routes:
         # ── Usuarios ──
         - id: users-service
-          uri: ${USERS_SERVICE_URI:http://3.151.143.108:8081}
+          uri: ${USERS_SERVICE_URI:http://localhost:8081}
           predicates:
             - Path=/api/auth/**, /api/personas/**, /api/documents/**
           filters:
@@ -59,7 +58,7 @@ spring:
         - id: notifications-service
           uri: ${NOTIFICATIONS_SERVICE_URI:http://localhost:8085}
           predicates:
-            - Path=/api/notificaciones/**, /api/tokens/**
+            - Path=/api/notificaciones/**, /api/recovery/**
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
 
@@ -73,3 +72,5 @@ gateway:
     - /api/auth/register-therapist
     - /api/auth/google
     - /api/auth/forgot-password
+    - /api/recovery/forgot-password
+    - /api/recovery/reset-password

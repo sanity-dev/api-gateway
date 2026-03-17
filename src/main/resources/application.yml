@@ -24,7 +24,7 @@ spring:
       routes:
         # ── Usuarios ──
         - id: users-service
-          uri: ${USERS_SERVICE_URI:http://3.151.143.108:8081}
+          uri: ${USERS_SERVICE_URI:http://localhost:8081}
           predicates:
             - Path=/api/auth/**, /api/personas/**, /api/documents/**
           filters:

@@ -6,7 +6,7 @@ USERS_SERVICE_URI: "http://3.151.143.108:8081"
 SPECIALIST_SERVICE_URI: "http://3.151.143.108:8082"
 DIARY_SERVICE_URI: "http://3.151.143.108:8083"
 NOTIFICATIONS_SERVICE_URI: "http://3.151.143.108:8085"
-EUPHORIA_SERVICE_URI: "https://euphoria-app.politedune-01b83c33.westus2.azurecontainerapps.io"
+EUPHORIA_SERVICE_URI: "http://20.85.243.149:8000"
 
 # También puedes cambiar el secreto en producción por uno más seguro
-JWT_SECRET: "MiClaveSuperSeguraDeProduccionDeAlMenos512BitsParaQueSeaValidaYProtegida"
+JWT_SECRET: "MiClaveSecretaSuperSeguraParaJWTDebeSerMuyLarga123456789"

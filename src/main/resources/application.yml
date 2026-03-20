@@ -56,9 +56,9 @@ spring:
 
         # ── Notificaciones ──
         - id: notifications-service
-          uri: ${NOTIFICATIONS_SERVICE_URI:http://localhost:8085}
+          uri: http://localhost:8085
           predicates:
-            - Path=/api/notificaciones/**, /api/recovery/**
+            - Path=/api/recovery/*, /api/notifications/*
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
 
@@ -71,6 +71,7 @@ gateway:
     - /api/auth/register
     - /api/auth/register-therapist
     - /api/auth/google
-    - /api/auth/forgot-password
     - /api/recovery/forgot-password
     - /api/recovery/reset-password
+    - /api/personas/exists
+    - /api/personas/reset-password

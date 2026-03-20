@@ -4,8 +4,8 @@
 ALLOWED_ORIGINS: "http://localhost:4200" # Cambia esto por la URL real de tu front de producción cuando la tengas (ej: .com)
 USERS_SERVICE_URI: "http://3.151.143.108:8081"
 SPECIALIST_SERVICE_URI: "http://3.151.143.108:8082"
-DIARY_SERVICE_URI: "http://3.151.143.108:8083"
-NOTIFICATIONS_SERVICE_URI: "http://3.151.143.108:8085"
+DIARY_SERVICE_URI: "http://4.242.43.59:8083"
+NOTIFICATIONS_SERVICE_URI: "http://4.242.43.59:8085"
 EUPHORIA_SERVICE_URI: "http://20.85.243.149:8000"
 
 # También puedes cambiar el secreto en producción por uno más seguro

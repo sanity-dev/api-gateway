@@ -35,7 +35,8 @@ public class JwtAuthFilter implements GlobalFilter, Ordered {
             "/api/auth/register",
             "/api/auth/register-therapist",
             "/api/auth/google",
-            "/api/auth/forgot-password"
+            "/api/recovery/forgot-password",
+            "/api/recovery/reset-password"
     );
 
     public JwtAuthFilter(JwtUtil jwtUtil) {

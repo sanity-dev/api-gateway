@@ -6,7 +6,7 @@ USERS_SERVICE_URI: "http://3.151.143.108:8081"
 SPECIALIST_SERVICE_URI: "http://18.118.129.115:8082"
 DIARY_SERVICE_URI: "http://4.242.43.59:8083"
 NOTIFICATIONS_SERVICE_URI: "http://4.242.43.59:8085"
-EUPHORIA_SERVICE_URI: "http://20.85.243.149:8000"
+EUPHORIA_SERVICE_URI: "https://new-euphoria-production.up.railway.app"
 
 # También puedes cambiar el secreto en producción por uno más seguro
 JWT_SECRET: "MiClaveSecretaSuperSeguraParaJWTDebeSerMuyLarga123456789"

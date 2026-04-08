@@ -21,7 +21,7 @@ spring:
             allowedHeaders: "*"
             allowCredentials: true
 
-     routes:
+      routes:
         # ── Usuarios ──
         - id: users-service
           uri: ${USERS_SERVICE_URI:http://localhost:8081}
@@ -34,7 +34,7 @@ spring:
         - id: specialist-service
           uri: ${SPECIALIST_SERVICE_URI:http://localhost:8082}
           predicates:
-            - Path=/api/specialist, /api/specialist/**, /api/appointment, /api/appointment/**, /api/membership, /api/membership/**,
+            - Path=/api/specialist, /api/specialist/**, /api/appointment, /api/appointment/**, /api/membership, /api/membership/**
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
 
@@ -64,6 +64,7 @@ spring:
 
 jwt:
   secret: ${JWT_SECRET:MiClaveSecretaSuperSeguraParaJWTDebeSerMuyLarga123456789}
+
 gateway:
   open-endpoints:
     - /api/auth/login

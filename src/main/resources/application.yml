@@ -4,7 +4,7 @@ server:
 spring:
   application:
     name: api-gateway
- 
+
   cloud:
     gateway:
       globalcors:
@@ -21,12 +21,12 @@ spring:
             allowedHeaders: "*"
             allowCredentials: true
 
-      routes:
+     routes:
         # ── Usuarios ──
         - id: users-service
           uri: ${USERS_SERVICE_URI:http://localhost:8081}
           predicates:
-            - Path=/api/auth/**, /api/personas/**, /api/documents/**
+            - Path=/api/auth, /api/auth/**, /api/personas, /api/personas/**, /api/documents, /api/documents/**
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
 
@@ -34,7 +34,7 @@ spring:
         - id: specialist-service
           uri: ${SPECIALIST_SERVICE_URI:http://localhost:8082}
           predicates:
-            - Path=/api/specialist/**, /api/appointment/**
+            - Path=/api/specialist, /api/specialist/**, /api/appointment, /api/appointment/**, /api/membership, /api/membership/**,
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
 
@@ -42,7 +42,7 @@ spring:
         - id: euphoria-service
           uri: ${EUPHORIA_SERVICE_URI:http://localhost:5000}
           predicates:
-            - Path=/api/euphoria/**
+            - Path=/api/euphoria, /api/euphoria/**
           filters:
             - RewritePath=/api/euphoria/(?<segment>.*), /$\{segment}
 
@@ -50,7 +50,7 @@ spring:
         - id: diary-service
           uri: ${DIARY_SERVICE_URI:http://localhost:8083}
           predicates:
-            - Path=/api/diary/**, /api/habits/**, /api/album/**
+            - Path=/api/diary, /api/diary/**, /api/habits, /api/habits/**, /api/album, /api/album/**
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
 
@@ -58,13 +58,12 @@ spring:
         - id: notifications-service
           uri: ${NOTIFICATIONS_SERVICE_URI:http://localhost:8085}
           predicates:
-            - Path=/api/notificaciones/**, /api/recovery/**
+            - Path=/api/recovery, /api/recovery/**, /api/notifications, /api/notifications/**, /api/tokens, /api/tokens/**
           filters:
             - RewritePath=/(?<segment>.*), /$\{segment}
 
 jwt:
   secret: ${JWT_SECRET:MiClaveSecretaSuperSeguraParaJWTDebeSerMuyLarga123456789}
-
 gateway:
   open-endpoints:
     - /api/auth/login
@@ -72,5 +71,8 @@ gateway:
     - /api/auth/register-therapist
     - /api/auth/google
     - /api/auth/forgot-password
+    - /api/membership/webhook
     - /api/recovery/forgot-password
     - /api/recovery/reset-password
+    - /api/personas/exists
+    - /api/personas/reset-password
